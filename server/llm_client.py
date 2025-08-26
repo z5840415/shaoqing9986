@@ -42,14 +42,14 @@ def ask(provider: str, prompt: str) -> str:
     try:
         if provider == "openai":
             key = os.getenv("OPENAI_API_KEY")
-            if not key:
-                raise RuntimeError("OPENAI_API_KEY is not set")
-            return _call_openai(prompt, key)
+            if key:
+                return _call_openai(prompt, key)
+            return f"Mock response to: {prompt}"
         if provider == "gemini":
             key = os.getenv("GEMINI_API_KEY")
-            if not key:
-                raise RuntimeError("GEMINI_API_KEY is not set")
-            return _call_gemini(prompt, key)
+            if key:
+                return _call_gemini(prompt, key)
+            return f"Mock response to: {prompt}"
         return f"Mock response to: {prompt}"
     except Exception:
         return f"Mock response to: {prompt}"
